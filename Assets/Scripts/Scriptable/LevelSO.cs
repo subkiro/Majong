@@ -43,7 +43,7 @@ public class LevelSO : ScriptableObject
             char[] lineChars =  lines[row].ToCharArray();
             for (int colum = 0; colum < y; colum++)
             {
-                Debug.Log(row + " " + colum);
+                //Debug.Log(row + " " + colum);
                 arrayList[row, colum] = lineChars[colum];
             }
         }
@@ -51,4 +51,7 @@ public class LevelSO : ScriptableObject
         //will implement later
         return arrayList;
     }
+
+
+   
 }

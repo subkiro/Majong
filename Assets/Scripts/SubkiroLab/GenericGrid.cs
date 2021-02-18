@@ -11,15 +11,13 @@ public class GenericGrid<TGridObject>
     private TGridObject[,] gridArray;
     private TextMesh[,] textMeshArray;
 
-    //event 
-    public delegate void OnGridObjectChanged(int x, int y);
-    public event OnGridObjectChanged OnGridObjectChangedEvent;
+   
 
 
 
 
     //constuctor
-    public GenericGrid(int width, int height, float cellSize, Vector3 originPosition, Func<GenericGrid<TGridObject>,int,int,TGridObject> createGridObject, bool ShowGrid = false)
+    public GenericGrid(int width, int height, float cellSize, Vector3 originPosition, Func<GenericGrid<TGridObject>,int,int,TGridObject> createGridObject, bool ShowGrid = true)
     {
         this.width = width;
         this.height = height;
@@ -36,49 +34,14 @@ public class GenericGrid<TGridObject>
             }
         }
 
-
-
-                if (ShowGrid) {
-
-                        for (int x = 0; x < gridArray.GetLength(0); x++)
-                        {
-                            for (int y = 0; y < gridArray.GetLength(1); y++)
-                            {
-                            //Create Visual
-                   
-                            //move visuals to the center of the cell grid
-                             Vector3 offcet = new Vector3(cellSize, cellSize) * 0.5f;   
-                                        
-                             textMeshArray[x,y] =  Subkiro.CreateTextMesh(gridArray[x,y]?.ToString(),null, GetWorldPosition(x, y) + offcet);
-                            //draw the lines to see the grid 
-                             Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1),Color.white,100f);
-                             Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x+1, y), Color.white, 100f);
-                             }
-               
-                         }
-                        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
-                        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
-
-                        OnGridObjectChangedEvent += (myX, myY) => { 
-                            textMeshArray[myX, myY].text = gridArray[myX, myY]?.ToString(); 
-                 };
-        }
-
-
     }
 
-    internal void TriggerGridObject(GenericGrid<TGridObject> grid, int x, int y)
-    {
-       // OnGridObjectChangedEvent(x, y);
-    }
-
+   
     public void SetGridObject(int x, int y, TGridObject value) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
             gridArray[x, y] = value;
-            textMeshArray[x, y].text = value.ToString(); ;
-            if (OnGridObjectChangedEvent != null) {
-                OnGridObjectChangedEvent(x, y);
-            }
+           
+           
         }
        
     }

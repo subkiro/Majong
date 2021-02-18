@@ -12,9 +12,9 @@ public class CardSO : ScriptableObject
     public GameObject CardPrefab;
     public bool isSelected = false;
 
-    public GameObject CreateCard(CardGrid c) {
+    public GameObject CreateCard(GenericGrid<CardGrid> grid,int x, int y) {
         GameObject tmp = Instantiate(CardPrefab);
-        tmp.GetComponent<Card>().InitCard(id, face, tile,c); 
+        tmp.GetComponent<Card>().InitCard(id, face, tile,grid, x,  y); 
 
         return tmp;
     }

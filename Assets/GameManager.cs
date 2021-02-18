@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             {
                 s += a[i,j];
             }
-            Debug.Log(s);
+           // Debug.Log(s);
         }
     }
 }
