@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadCurrentLevel(LevelSO lvl)
     {
+        SoundManager.instance.PlayVFX("pvp");
         this.CurrentLevel = lvl;
 
         SceneManager.LoadScene(1);
@@ -48,7 +49,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0) {
+            SoundManager.instance.PlayVFX("return");
             UIManager.instance.ShopPopExit("Exit to main menu?", () => {
+                SoundManager.instance.PlayVFX("negative1");
                 UIManager.instance.ShopPopUpLost("You are lost lvl "+CurrentLevel.levelID, ()=> SceneManager.LoadScene(0));
              });
             

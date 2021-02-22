@@ -34,7 +34,7 @@ public class ScoreSystem : MonoBehaviour
        currentScore +=  Points;
        CurrentScoreText.SetText(currentScore.ToString());
        CurrentScoreText.rectTransform.DOLocalJump(Vector3.zero, 2,1,0.3f).SetRelative();
-
+        SoundManager.instance.PlayVFX("Buble");
         if (currentScore > totalScore) {
             totalScore = currentScore;
             TotalScoreText.SetText(totalScore.ToString());
@@ -46,12 +46,13 @@ public class ScoreSystem : MonoBehaviour
     }
 
     public void SubtractPoints(int Points) {
+        SoundManager.instance.PlayVFX("negative");
         currentScore -= Points;
         currentScore = (currentScore<0)? 0:currentScore;
         CurrentScoreText.SetText(currentScore.ToString());
         Color color = Camera.main.backgroundColor;
         
-        Camera.main.DOColor(color, 0.5f).From(Color.red);
+        Camera.main.DOColor(color, 0.5f).From(Color.black);
     }
     
     

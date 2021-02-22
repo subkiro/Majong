@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnShow() {
 
+        SoundManager.instance.PlayVFX("positive2");
         List<LevelSO> levels = GameManager.i.listOfAssets.AllLevels;
         foreach (LevelSO item in levels)
         {

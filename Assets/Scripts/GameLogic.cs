@@ -219,6 +219,7 @@ public class GameLogic : MonoBehaviour
                 c.IsSelected = false;
                 selecedCard.IsSelected = false;
                 selecedCard = null;
+                ScoreSystem.instance.SubtractPoints(10); //sub points to the user
             }
 
 
@@ -230,7 +231,7 @@ public class GameLogic : MonoBehaviour
     public bool CheckIfCanSearch(int x, int y) {
 
         if (x > 0 && x < grid.width-1 && y > 0 && y<grid.height-1) {
-            Debug.Log("x = " + x+ "--------"+"y= "+y);
+        //    Debug.Log("x = " + x+ "--------"+"y= "+y);
             if (grid.GetGridObject(x - 1, y).isNotEmpty &&
                 grid.GetGridObject(x + 1, y).isNotEmpty &&
                  grid.GetGridObject(x, y - 1).isNotEmpty &&
@@ -253,9 +254,11 @@ public class GameLogic : MonoBehaviour
         ScoreSystem.instance.AddPoints(15); //Give points to the user
 
         if (this.transform.childCount <=2) {
-            UIManager.instance.ShopPopUpWin("Level Completed", () => SceneManager.LoadScene(0));
+            string score = "Score " + ScoreSystem.instance.currentScore + " - Max Score " + ScoreSystem.instance.totalScore;
+            UIManager.instance.ShopPopUpWin(score, () => SceneManager.LoadScene(0));
             GameManager.i.CurrentLevel.isCompleted = true;
-           
+            SoundManager.instance.PlayVFX("positive1");
+
 
         }
     }
@@ -269,10 +272,11 @@ public class GameLogic : MonoBehaviour
         {
             for (int j = i + 1; j < cardGridList.Count; j++)
             {
-                if (CheckIfCanSearch(cardGridList[j].card.GridPosX, cardGridList[j].card.GridPosY) &&CheckPath(cardGridList[i].card, cardGridList[j].card) && cardGridList[i].card.id == cardGridList[j].card.id) {
+                if (CheckIfCanSearch(cardGridList[j].card.GridPosX, cardGridList[j].card.GridPosY) && CheckPath(cardGridList[i].card, cardGridList[j].card) && cardGridList[i].card.id == cardGridList[j].card.id) {
                     Debug.Log("MatchFound--->" + "Card1: =" + cardGridList[i].card.id + " and Card2: = " + cardGridList[j].card);
-                    cardGridList[i].card.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
-                    cardGridList[j].card.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
+                    cardGridList[i].card?.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
+                    cardGridList[j].card?.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
+                    SoundManager.instance.PlayVFX("ok1");
                     return ;
                 } 
 
@@ -282,6 +286,8 @@ public class GameLogic : MonoBehaviour
     }
     private bool CheckPath(Card c2, Card c1)
     {
+
+        
         int startX =(int)c1.GetGridPos().x;
         int startY =(int)c1.GetGridPos().y;
 

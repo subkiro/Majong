@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732f5d2e73908db468f6ab84de8a17b6, type: 3}
+  m_Name: Card 33
+  m_EditorClassIdentifier: 
+  face: {fileID: 21300000, guid: 237195224a73c0f40a9bc47cec5264c8, type: 3}
+  tile: {fileID: 21300000, guid: 29e5d151b01da5b4097283aef3b027ff, type: 3}
+  id: 33
+  CardPrefab: {fileID: 2234075347132227633, guid: 34c75fca2dfbbd4408a1778ac9e914dd, type: 3}
+  isSelected: 0

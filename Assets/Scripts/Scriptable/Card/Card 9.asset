@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732f5d2e73908db468f6ab84de8a17b6, type: 3}
   m_Name: Card 9
   m_EditorClassIdentifier: 
-  face: {fileID: 21300000, guid: a668e06125840ca43b6c9834a4498001, type: 3}
+  face: {fileID: 21300000, guid: 9af4e0da8eddc344bbbccce0a872703c, type: 3}
   tile: {fileID: 21300000, guid: 29e5d151b01da5b4097283aef3b027ff, type: 3}
   id: 9
   CardPrefab: {fileID: 2234075347132227633, guid: 34c75fca2dfbbd4408a1778ac9e914dd, type: 3}
