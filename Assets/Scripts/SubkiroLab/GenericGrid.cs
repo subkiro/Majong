@@ -6,10 +6,9 @@ public class GenericGrid<TGridObject>
 {
     public int width = 5;
     public int height = 5;
-    public float cellSize;
+    public float cellSizeX,cellSizeY;
     private Vector3 originPosition;
     private TGridObject[,] gridArray;
-    private TextMesh[,] textMeshArray;
 
    
 
@@ -17,14 +16,14 @@ public class GenericGrid<TGridObject>
 
 
     //constuctor
-    public GenericGrid(int width, int height, float cellSize, Vector3 originPosition, Func<GenericGrid<TGridObject>,int,int,TGridObject> createGridObject, bool ShowGrid = true)
+    public GenericGrid(int width, int height, float cellSizeX,float cellSizeY, Vector3 originPosition, Func<GenericGrid<TGridObject>,int,int,TGridObject> createGridObject, bool ShowGrid = true)
     {
         this.width = width;
         this.height = height;
-        this.cellSize = cellSize;
+        this.cellSizeX = cellSizeX;
+        this.cellSizeY = cellSizeY;
         this.originPosition = originPosition;
         gridArray = new TGridObject[this.width, this.height];
-        textMeshArray = new TextMesh[this.width, this.height];
 
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
@@ -47,13 +46,13 @@ public class GenericGrid<TGridObject>
     }
 
     public Vector3 GetWorldPosition(int x, int y) {
-        return new Vector3(x, y) * cellSize + originPosition;
+        return new Vector3(x* cellSizeX, y* cellSizeX)  + originPosition;
     }
     
     
     private void GetXY(Vector3 worldPosition, out int x, out int y) {
-        x = Mathf.FloorToInt((worldPosition - originPosition).x  / cellSize);
-        y = Mathf.FloorToInt((worldPosition - originPosition).y/ cellSize);
+        x = Mathf.FloorToInt((worldPosition - originPosition).x  / cellSizeX);
+        y = Mathf.FloorToInt((worldPosition - originPosition).y/ cellSizeY);
     }
     public void SetGridObject(Vector3 worldPosition, TGridObject value)
     {

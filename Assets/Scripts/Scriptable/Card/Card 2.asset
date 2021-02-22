@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 2
   m_EditorClassIdentifier: 
   face: {fileID: 21300000, guid: 622f739960bcb96448ebdc8d3d63bb10, type: 3}
-  tile: {fileID: 21300000, guid: d4d69f8ea2e5e204bb18aba7e5b1e048, type: 3}
+  tile: {fileID: 21300000, guid: 29e5d151b01da5b4097283aef3b027ff, type: 3}
   id: 2
   CardPrefab: {fileID: 2234075347132227633, guid: 34c75fca2dfbbd4408a1778ac9e914dd, type: 3}
   isSelected: 0

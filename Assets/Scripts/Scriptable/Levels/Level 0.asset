@@ -14,7 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 0
   LevelPhoto: {fileID: 21300000, guid: aaad1fc8c59066049981eec99706a786, type: 3}
-  isCompleted: 0
-  level: "X0000000X00\r\n0X000000X00\r\n00X00000X00\r\n000X0000X00\t\r\n0000X000X00\r\n00000X00X00\r\n000000X0X00\r\n0000000XXXX\r\nXXXXXXXXXXX\r\n0000000XXXX\r\n0000000XXXX"
+  isCompleted: 1
+  level: '00000000X00
+
+    0X000000X00
+
+    00X00000X00
+
+    000X0000X00
+
+    0000X000X00
+
+    00000X00X00
+
+    000000X0X00
+
+    0000000XXXX
+
+    XXXXXXXXXXX
+
+    0000000XXXX
+
+    0000000XXXX'
   x: 11
   y: 11
