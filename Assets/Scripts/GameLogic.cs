@@ -203,6 +203,9 @@ public class GameLogic : MonoBehaviour
                 }
                 else
                 {
+                    ScoreSystem.instance.SpawnText(c.transform.parent, c.transform.position, "-", Color.red);
+                    ScoreSystem.instance.SpawnText(selecedCard.transform.parent, selecedCard.transform.position, "-", Color.red);
+
                     ScoreSystem.instance.SubtractPoints(10); //sub points to the user
                     c.IsSelected = false;
                     selecedCard.IsSelected = false;
@@ -215,11 +218,14 @@ public class GameLogic : MonoBehaviour
             else
             {
                 //else make penalty
-               // Debug.Log("Direrent ID");
+                ScoreSystem.instance.SpawnText(c.transform.parent, c.transform.position, "-", Color.red);
+                ScoreSystem.instance.SpawnText(selecedCard.transform.parent, selecedCard.transform.position, "-", Color.red);
+                // Debug.Log("Direrent ID");
                 c.IsSelected = false;
                 selecedCard.IsSelected = false;
                 selecedCard = null;
                 ScoreSystem.instance.SubtractPoints(10); //sub points to the user
+                
             }
 
 
@@ -246,6 +252,9 @@ public class GameLogic : MonoBehaviour
 
     public void SuccessMatchGivePoints(int points,Card c1,Card c2) {
 
+        ScoreSystem.instance.SpawnText(c1.transform.parent,c1.transform.position, "+",Color.white);
+        ScoreSystem.instance.SpawnText(c2.transform.parent, c2.transform.position, "+", Color.white);
+
 
         c1.DestroyCard(); 
         c2.DestroyCard();
@@ -261,12 +270,15 @@ public class GameLogic : MonoBehaviour
 
 
         }
+
+        Invoke("FindeWithBruteForceInThereIsNextMove", .5f);
     }
 
 
 
     public void FindeWithBruteForce()
     {
+        selecedCard = null;
                
         for (int i = 0; i < cardGridList.Count; i++)
         {
@@ -274,16 +286,47 @@ public class GameLogic : MonoBehaviour
             {
                 if (CheckIfCanSearch(cardGridList[j].card.GridPosX, cardGridList[j].card.GridPosY) && CheckPath(cardGridList[i].card, cardGridList[j].card) && cardGridList[i].card.id == cardGridList[j].card.id) {
                     Debug.Log("MatchFound--->" + "Card1: =" + cardGridList[i].card.id + " and Card2: = " + cardGridList[j].card);
-                    cardGridList[i].card?.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
-                    cardGridList[j].card?.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
+                    cardGridList[i]?.card.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
+                    cardGridList[j]?.card.transform.DOPunchScale(Vector3.one * 0.5f, .5f);
                     SoundManager.instance.PlayVFX("ok1");
                     return ;
                 } 
 
             }
         }
-      
+
+        UIManager.instance.ShopPopUpLost("No More Moves - You Lost", () => SceneManager.LoadScene(0));
     }
+
+
+    public void FindeWithBruteForceInThereIsNextMove()
+    {
+        selecedCard = null;
+
+        for (int i = 0; i < cardGridList.Count; i++)
+        {
+            for (int j = i + 1; j < cardGridList.Count; j++)
+            {
+                if (CheckIfCanSearch(cardGridList[j].card.GridPosX, cardGridList[j].card.GridPosY) && CheckPath(cardGridList[i].card, cardGridList[j].card) && cardGridList[i].card.id == cardGridList[j].card.id)
+                {
+                    Debug.Log("MatchFound--->" + "Card1: =" + cardGridList[i].card.id + " and Card2: = " + cardGridList[j].card.id);
+                    return;
+                }
+
+            }
+        }
+
+
+        if ( this.transform.childCount >0)
+        {
+            UIManager.instance.ShopPopUpLost("No More Moves - You Lost", () => SceneManager.LoadScene(0));
+        }
+
+    }
+
+
+
+
     private bool CheckPath(Card c2, Card c1)
     {
 

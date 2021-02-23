@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Rendering;
+
 public class ScoreSystem : MonoBehaviour
 {
 
@@ -42,6 +44,10 @@ public class ScoreSystem : MonoBehaviour
            // PlayerPrefs.SetInt("TotalScore", totalScore);
         }
 
+
+        
+
+
      
     }
 
@@ -64,6 +70,18 @@ public class ScoreSystem : MonoBehaviour
 
     public void ResetCurrentScore() {
         currentScore = 0;
+    }
+
+    public void SpawnText(Transform trans, Vector3 pos, string text,Color color) {
+        TextMesh t =  Subkiro.CreateTextMesh(text, trans.parent, pos,100,0.1f);
+        t.gameObject.AddComponent<SortingGroup>().sortingOrder = 100;
+        t.gameObject.transform.position = pos;
+        t.color = color;
+        DOTween.ToAlpha(() => color, x => t.color = x, 0, 1f);
+        t.transform.DOMoveY(2, 1f).SetRelative();
+        
+        
+        Destroy(t.gameObject, 1.1f);
     }
 
 }

@@ -98,6 +98,7 @@ public class Card : MonoBehaviour
 
         this.grid.GetGridObject(GridPosX, GridPosY).isNotEmpty = false;
         this.transform.DOKill(true);
+        
         Destroy(this.gameObject);
     }
 }
